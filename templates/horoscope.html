@@ -1,0 +1,31 @@
+<!doctype html>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<html>
+    <head>
+        <title>My First Web App</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+
+    <body>
+
+            {% if data %}
+
+                <p> <h2> <b> {{data}} </b>  </h2></p>
+
+    <br>
+    <li>Current Date: {{data.current_date}}</li>
+    <li>Compatibility: {{data.compatibility}}</li>
+    <li>Lucky Number: {{data.lucky_number}}</li>
+    <li>Lucky Time: {{data.lucky_time}}</li>
+    <li>Color: {{data.color}}</li>
+    <li>Date Range: {{data.date_range}}</li>
+    <li>Mood: {{data.mood}}</li>
+    <li>Description: {{data.description}}</li>
+
+            {% else %}
+
+            <p>No Message!</p>
+
+            {% endif %}
+ </body>
+ </html>
