@@ -6,7 +6,7 @@ import json
 #Function that takes month and a day and calcuates Zodiac sign
 def zodiac_sign(month, day):
 	sign = 'N/A'
-
+	
 	if month == 12:
 		sign = 'Sagittarius' if (day < 22) else 'capricorn'
 	elif month == 1:
@@ -35,21 +35,21 @@ def zodiac_sign(month, day):
 	return sign
 
 # call rest API to get horoscope for a given zodiac sign
-def handle_horoscope(sign):
+def get_horoscope(sign):
 
-	params = (
+	params = ( 
 	('sign', sign),
-	('day', 'today'),
+	('day', 'today'), 
 	)
 
-	# aztro provide free API to get horoscope for a sign -
+	# aztro provide free API to get horoscope for a sign - 
 	#API takes two param 1.sign (example values cancer, leo etc)  2. day possible values today, tomorrow etc
-	response = requests.post('https://aztro.herokuapp.com/', params=params)
+	#response = requests.post('https://aztro.herokuapp.com/', params=params)
+	response = requests.post('https://aztro.sameerkumar.website/', params=params)
 
 	print response.url
 	print response.status_code
 	print response.headers["content-type"]
-
 	json_data = response.json()
 	#json is raw data which contains all the data from the api response
 	return json_data

@@ -1,48 +1,59 @@
-from flask import Flask, render_template, request
-from horoscopeapi import zodiac_sign, handle_horoscope
+from flask import Flask , render_template, request
+from horoscopeapi import zodiac_sign, get_horoscope
 
-app = Flask("MyApp")
+app = Flask("Test")
 
-def calculate_gen(year_parameter) :
-    gen='Unknown'
 
-    # add logic here to identify generation
-    if year_parameter >= 1964 and year_parameter <=1978:
-        gen='very OLD'
-    if year_parameter > 1979 and year_parameter <= 1995:
-         gen='Y - Millenials'
-    if year_parameter > 1996 and year_parameter <= 2012:
-        gen='Z'
+def calculate_gen(year_parameter) : 
+	gen='Unknow'
 
-    return gen
+	# add logic here to identify generation
+	if year_parameter >= 1964 and year_parameter <=1978:
+		gen='very OLD'
+	if year_parameter > 1979 and year_parameter <= 1995:
+	 	gen='Y - Millenials'
+	if year_parameter > 1996 and year_parameter <= 2012:
+		gen='Z'
 
-@app.route("/<visitor>")
-def hello(visitor):
-    m = "Welcome to my page:" + visitor.title()
-    return render_template("index.html", message=m)
+	return gen
 
+
+@app.route("/")
+def default():
+	m = "Welcome to my page"
+	return render_template("index.html", message=m)
+
+@app.route("/<vistor>")
+def hello(vistor):
+	m = "Welcome to my page:" + vistor.title()
+	return render_template("index.html", message=m)
+	#return "hello"
 
 @app.route("/gen", methods=["POST"])
 def showgeneration():
-    form_data = request.form #Getting hold of a Form object
-    year = form_data["dob"]
-    day = form_data["day"]
-    month = form_data["month"]
+	form_data = request.form #Getting hold of a Form object that is sent from a browser.
+	year = form_data["dob"]
 
-    gen = calculate_gen(int(year))
+	gen = calculate_gen(int(year))
 
-    return render_template("gen.html", generation=gen)
+	return render_template("gen.html", generation=gen)
 
 @app.route("/horoscope", methods=["POST"])
-def get_horoscope():
-    form_data = request.form #Getting hold of a Form object
-    day = form_data["day"]
-    month = form_data["month"]
-    print month
-    print day
-    z_sign = zodiac_sign(int(month),int(day))
-    raw_data = handle_horoscope(z_sign)
+def handle_horoscope():
+	form_data = request.form #Getting hold of a Form object that is sent from a browser.
+	day = form_data["day"]
+	month = form_data["month"]
 
-    return render_template("horoscope.html", data=raw_data)
+	#gen = calculate_gen(int(year))
 
-app.run()
+	z_sign	= zodiac_sign(int(month),int(day))
+
+	print "Sign - "+ z_sign
+	data	= get_horoscope(z_sign)
+	print data
+
+	return render_template("horoscope.html", data=data)
+
+
+if __name__ == "__main__":
+	app.run()

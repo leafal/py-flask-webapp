@@ -4,7 +4,7 @@
     <head>
         <title>My First Web App</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
+    </head> 
 
     <body>
 
@@ -20,13 +20,11 @@
 
         <div class="home">
             <h2 class="logo">Example 1: To post data  to the backend</h1>
-
+        
             <div id="contact-form" >
                 <form method="post" action="/gen">
                     <label for="text">Please Enter Year of your brith</label>
                     <input type="text" id="dob" name="dob" required="required">
-                    <input type="text" id="day" name="day" required="required">
-                    <input type="text" id="month" name="month" required="required">
                     <input type="submit" value="Submit" id="submit"/>
                 </form>
             </div>
@@ -36,16 +34,16 @@
 
             <div id="contact-form-2" >
                 <form method="post" action="/horoscope">
-                    <label for="text">Please Enter the day and year of your birth </label>
-                    Day : <input type="text" id="day" name="day" required="required">
-                    Month : <input type="text" id="month" name="month" required="required">
+                    <label for="text">Please Enter the day and year of yourbrith</label>
+
+                    <input type="text" id="day" name="day" required="required">
+
+                    <input type="text" id="month" name="month" required="required">
+
                     <input type="submit" value="Submit" id="submit"/>
                 </form>
             </div>
-
         </div>
 
-
-
-    </body>
+    </body> 
 </html>
